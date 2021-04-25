@@ -19,20 +19,28 @@ function _draw()
 	for o in all(objects) do
 		if o.base == player then p = o else o:draw() end
 	end
-    draw_char_ship()
+    if p.is_char then
+        draw_char_ship()
+    end
 	if p then p:draw() end
+    if(p.can_warp) then
+        camera()
+        print("press x to warp")
+        print(p.can_use_ship_helm)
+        camera(camera_x, camera_y)
+    end
 end
 
 function start_game()
-    load_objects()
+    load_sector(current_sector)
+    load_sector(ship_ob)
     _starfield:init_stars()
 end
 
-function load_objects()
-    --local level = {width=16, height=16}
+function load_sector(sector)
     --create objects
-	for i = 0,128 do
-		for j = 0,15 do
+	for i = sector.x, sector.x + sector.w do
+		for j = sector.y, sector.y + sector.h do
 			for t in all(types) do
 				--if t != player then
                     if mget(i, j) == t.spr then

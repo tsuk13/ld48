@@ -66,11 +66,6 @@ end
 -- function to update stars!
 --------------------------------
 function _starfield.update_stars(self)
-   if self.star_spd >= 3 then
-    self.warp = 2
-   else
-    self.warp=1
-   end
   --  go through all entries in
   -- "stars"..
   for st in all(self.stars) do
