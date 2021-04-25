@@ -1,0 +1,1 @@
+red_planet = new_type(10)
