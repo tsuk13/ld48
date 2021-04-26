@@ -109,10 +109,14 @@ function player.update(self)
 
                 self.velocity.x = approach(self.velocity.x, mov_vec.x, .1)
                 self.velocity.y = approach(self.velocity.y, mov_vec.y, .1)
+                --sfx(1, 0)
             --stop
             elseif input_y > 0 and not self.breaker_flipped then
                 self.velocity.x = approach(self.velocity.x, 0, .1)
                 self.velocity.y = approach(self.velocity.y, 0, .1)
+                --sfx(-1, 0)
+            else
+                --sfx(-1, 0)
             end
 
             
