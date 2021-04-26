@@ -22,6 +22,8 @@ function player.init(self)
     self.target_sector = nil
     self.can_switch_to_char = true
     self.target_planet = nil
+    self.visited_the_deep = false
+    self.visited_lsl_112 = false
     camera_x = self.x - 60
     camera_y = self.y - 60
 end
@@ -29,7 +31,7 @@ end
 function player.update(self)
     if self.is_warping then
         if self.angle != self.target_warp_heading then
-            self.angle = (self.angle + self.turn_spd) % 360
+            self.angle = (self.angle + 5) % 360
         else
             --calculate movement vector
             local mov_vec = {}
@@ -201,6 +203,10 @@ function player.draw(self)
             camera(camera_x, camera_y)
         end
     end
+    camera()
+    print(p.x)
+    print(p.y)
+    camera(camera_x, camera_y)
 end
 
 function player.switch_to_char(self)
@@ -240,5 +246,15 @@ end
 
 function player.land_planet(self, planet)
     freeze_game()
-    dtb_quick_queue(planet.dialogue, unfreeze_game)
+    if planet.base == lsl_113 and self.visited_the_deep and self.visited_lsl_112 then
+        dtb_quick_queue({"The End"}, unfreeze_game)
+    else
+        dtb_quick_queue(planet.dialogue, unfreeze_game)
+        if planet.base == deep_blue then
+            self.visited_the_deep = true
+        end
+        if planet.base == lsl_112 then
+            self.visited_lsl_112 = true
+        end
+    end
 end

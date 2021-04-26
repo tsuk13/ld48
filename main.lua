@@ -10,8 +10,9 @@ function _update()
         update_input()
         _starfield:update_stars()
         for o in all(objects) do
-            o:update()
+            if o.base == player then p = o else o:update() end
         end
+        p:update()
     end
 end
 
@@ -36,7 +37,7 @@ function start_game()
     freeze_time = 0
     load_sector(current_sector)
     load_sector(ship_ob)
-    create(player, 24, 16)
+    create(player, 7*8, 7*8)
     _starfield:init_stars()
 end
 

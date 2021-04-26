@@ -94,13 +94,13 @@ function object.check_solid(self, ox, oy)
     ox = ox or 0
     oy = oy or 0
 
-	for i = flr((ox + self.x + self.hit_x) / 8),flr((ox + self.x + self.hit_x + self.hit_w - 1) / 8) do
-		for j = oy + self.y + self.hit_y,oy + self.y + self.hit_y + self.hit_h - 1 do
-			if fget(mget(i, j), 1) then
-				return true
-            end
-		end
-	end
+	-- for i = flr((ox + self.x + self.hit_x) / 8),flr((ox + self.x + self.hit_x + self.hit_w - 1) / 8) do
+	-- 	for j = oy + self.y + self.hit_y,oy + self.y + self.hit_y + self.hit_h - 1 do
+	-- 		if fget(mget(i, j), 1) then
+	-- 			return true
+    --         end
+	-- 	end
+	-- end
 
 	for o in all(objects) do
 		if o.solid and o != self and not o.destroyed and self:overlaps(o, ox, oy) then
