@@ -1,5 +1,13 @@
 red_planet = new_type(10)
+
 station = new_type(9)
+function station.init(self)
+    self.planet_name = "LSL-113"
+    self.dialogue = {
+        "test",
+        "1,2,3",
+    }
+end
 
 ship_wall = new_type(64)
 function ship_wall.init(self)

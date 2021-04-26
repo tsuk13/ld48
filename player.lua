@@ -20,6 +20,8 @@ function player.init(self)
     self.warp_data_index = -1
     self.warp_data = nil
     self.target_sector = nil
+    self.can_switch_to_char = true
+    self.target_planet = nil
     camera_x = self.x - 60
     camera_y = self.y - 60
 end
@@ -49,12 +51,13 @@ function player.update(self)
             --load level
             load_sector(self.target_sector)
             current_sector = self.target_sector
-            self.x = current_sector.x*8
-            self.y = current_sector.y*8
             --calculate movement vector
             local mov_vec = {}
             mov_vec.x = -sin(self.angle/360)
             mov_vec.y = -cos(self.angle/360)
+            self.x = (current_sector.x*8 + current_sector.w*4) - mov_vec.x * 64
+            self.y = (current_sector.y*8 + current_sector.h*4) - mov_vec.y * 64
+            self.y = current_sector.y*8
             self.velocity.x = mov_vec.x
             self.velocity.y = mov_vec.y
             self.is_warping = false
@@ -111,11 +114,26 @@ function player.update(self)
             self.ship_x = self.x
             self.ship_y = self.y
 
-            
-            --input a
-            if input_a_pressed > 0 then
-                consume_a_press()
+            --ship inspection checks
+            self.can_switch_to_char = true 
+            self.target_planet = nil
+            for o in all(objects) do
+                if self:overlaps(o) then 
+                    if o.planet_name then
+                        self.can_switch_to_char = false
+                        self.target_planet = o
+                    end
+                end
+            end
+            --input b
+            if input_b_pressed > 0 and self.can_switch_to_char then
+                consume_b_press()
                 self:switch_to_char()
+            end
+
+            if input_b_pressed > 0 and self.target_planet then
+                consume_b_press()
+                self:land_planet(self.target_planet)
             end
         else
             --character updates
@@ -123,6 +141,7 @@ function player.update(self)
             self:move_y(input_y)
             self.char_x = self.x
             self.char_y = self.y
+            --character inspection checks
             self.can_use_ship_helm = false
             self.can_use_navigation_comp = false
             for o in all(objects) do
@@ -158,6 +177,7 @@ function player.update(self)
 end
 
 function player.draw(self)
+    --character draw
     if self.is_char then
         spr(32, self.x, self.y, 1, 1)
         if(p.target_sector) then
@@ -166,12 +186,18 @@ function player.draw(self)
             print(p.target_sector.name)
             camera(camera_x, camera_y)
         end
+    --ship draw
     else
         spr_r(self.spr,self.x,self.y,self.angle,1,1)
         if(p.can_warp and p.target_sector) then
             camera()
             print("press x to warp")
             print(p.target_sector.name)
+            camera(camera_x, camera_y)
+        elseif(p.target_planet) then
+            camera()
+            print("press x to land")
+            print(p.target_planet.planet_name)
             camera(camera_x, camera_y)
         end
     end
@@ -210,4 +236,9 @@ function player.start_warp(self, sector)
     self.is_warping = true
     self.target_warp_heading = self.warp_data.heading
     self.warp_timer = 100
+end
+
+function player.land_planet(self, planet)
+    freeze_game()
+    dtb_quick_queue(planet.dialogue, unfreeze_game)
 end

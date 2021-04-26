@@ -1,14 +1,18 @@
 function _init()
     start_game()
+    dtb_init()
     --create(player, 0,0)
 end
 
 function _update()
-    update_input()
-    _starfield:update_stars()
-	for o in all(objects) do
-        o:update()
-	end
+    dtb_update()
+    if freeze_time == 0 then
+        update_input()
+        _starfield:update_stars()
+        for o in all(objects) do
+            o:update()
+        end
+    end
 end
 
 function _draw()
@@ -23,9 +27,13 @@ function _draw()
         draw_char_ship()
     end
 	if p then p:draw() end
+    camera()
+    dtb_draw()
+    camera(camera_x, camera_y)
 end
 
 function start_game()
+    freeze_time = 0
     load_sector(current_sector)
     load_sector(ship_ob)
     create(player, 24, 16)
@@ -49,4 +57,12 @@ end
 
 function draw_char_ship()
     map(112, 0, 112*8, 0, 16, 16)
+end
+
+function freeze_game()
+    freeze_time = 1
+end
+
+function unfreeze_game()
+    freeze_time = 0
 end
