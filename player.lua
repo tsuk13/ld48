@@ -12,11 +12,14 @@ function player.init(self)
     self.angle = 0
     self.ship_x = self.x
     self.ship_y = self.y
-    self.char_x = 123*8
-    self.char_y = 2*8
+    self.char_x = 120*8
+    self.char_y = 3*8
     self.is_char = false
     self.can_warp = false
     self.is_warping = false
+    self.warp_data_index = -1
+    self.warp_data = nil
+    self.target_sector = nil
     camera_x = self.x - 60
     camera_y = self.y - 60
 end
@@ -40,11 +43,12 @@ function player.update(self)
             self.warp_timer -= 1
             _starfield.warp = 2
         end
+        --end warp
         if self.warp_timer <= 0 then
             objects = { self }
             --load level
             load_sector(self.target_sector)
-            load_sector(ship_ob)
+            current_sector = self.target_sector
             self.x = current_sector.x*8
             self.y = current_sector.y*8
             --calculate movement vector
@@ -54,6 +58,9 @@ function player.update(self)
             self.velocity.x = mov_vec.x
             self.velocity.y = mov_vec.y
             self.is_warping = false
+            self.warp_data_index = -1
+            self.warp_data = nil
+            self.target_sector = nil
         end
         --apply movement
         self:move_x(self.velocity.x)
@@ -63,12 +70,12 @@ function player.update(self)
 
     else
         -- check can warp
-        self.can_warp = not(
-            self.x + self.hit_x + self.hit_w > current_sector.x*8 and
-            self.y + self.hit_y + self.hit_h > current_sector.y*8 and
-            self.x + self.hit_x < current_sector.x*8 + current_sector.w*8 and
-            self.y + self.hit_y < current_sector.y*8 + current_sector.h*8
-        )
+        self.can_warp = not (
+            self.x >= current_sector.x*8 and
+            self.x < current_sector.x*8 + current_sector.w*8 and
+            self.y >= current_sector.y*8 and
+            self.y < current_sector.y*8 + current_sector.h*8
+        ) and self.target_sector
         --ship updates
         if not self.is_char then 
             if input_x !=0 then
@@ -93,9 +100,9 @@ function player.update(self)
 
             
             --input a
-            if input_b_pressed > 0 then
+            if self.can_warp and input_b_pressed > 0 then
                 consume_b_press()
-                self:start_warp(sectors.home.s_warp[1])
+                self:start_warp(self.warp_data)
             end
 
             --apply movement
@@ -116,16 +123,24 @@ function player.update(self)
             self:move_y(input_y)
             self.char_x = self.x
             self.char_y = self.y
+            self.can_use_ship_helm = false
+            self.can_use_navigation_comp = false
             for o in all(objects) do
-                if o.base == ship_helm then
-                    self.can_use_ship_helm = true
-                else
-                    self.can_use_ship_helm = false
+                if self:overlaps(o) then 
+                    if o.base == ship_helm then
+                        self.can_use_ship_helm = true
+                    elseif o.base == navigation_comp then
+                        self.can_use_navigation_comp = true
+                    end
                 end
             end
             if input_a_pressed > 0 and self.can_use_ship_helm then
                 consume_a_press()
                 self:switch_to_ship()
+            end
+            if input_a_pressed > 0 and self.can_use_navigation_comp then
+                consume_a_press()
+                self:cycle_nav()
             end
         end
         _starfield.warp = 1
@@ -145,12 +160,26 @@ end
 function player.draw(self)
     if self.is_char then
         spr(32, self.x, self.y, 1, 1)
+        if(p.target_sector) then
+            camera()
+            print("warp target:")
+            print(p.target_sector.name)
+            camera(camera_x, camera_y)
+        end
     else
         spr_r(self.spr,self.x,self.y,self.angle,1,1)
+        if(p.can_warp and p.target_sector) then
+            camera()
+            print("press x to warp")
+            print(p.target_sector.name)
+            camera(camera_x, camera_y)
+        end
     end
 end
 
 function player.switch_to_char(self)
+    objects = {self}
+    load_sector(ship_ob)
     self.is_char = true
     self.spr = 32
     self.x = self.char_x
@@ -160,6 +189,8 @@ function player.switch_to_char(self)
 end
 
 function player.switch_to_ship(self)
+    objects = {self}
+    load_sector(current_sector)
     self.is_char = false
     self.spr = 1
     self.x = self.ship_x
@@ -168,9 +199,15 @@ function player.switch_to_ship(self)
     camera_y = self.y - 60
 end
 
+function player.cycle_nav(self)
+    local warp_datas = current_sector.warp_datas
+    self.warp_data_index = (self.warp_data_index + 1) % #warp_datas
+    self.warp_data = warp_datas[self.warp_data_index + 1]
+    self.target_sector = sectors[self.warp_data.sector_name]
+end
+
 function player.start_warp(self, sector)
     self.is_warping = true
-    self.target_sector = sectors[sector.sector_name]
-    self.target_warp_heading = sector.heading
+    self.target_warp_heading = self.warp_data.heading
     self.warp_timer = 100
 end

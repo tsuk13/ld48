@@ -23,17 +23,12 @@ function _draw()
         draw_char_ship()
     end
 	if p then p:draw() end
-    if(p.can_warp) then
-        camera()
-        print("press x to warp")
-        print(p.can_use_ship_helm)
-        camera(camera_x, camera_y)
-    end
 end
 
 function start_game()
     load_sector(current_sector)
     load_sector(ship_ob)
+    create(player, 24, 16)
     _starfield:init_stars()
 end
 
@@ -53,5 +48,5 @@ function load_sector(sector)
 end
 
 function draw_char_ship()
-    map(119, 0, 119*8, 0, 9, 9)
+    map(112, 0, 112*8, 0, 16, 16)
 end

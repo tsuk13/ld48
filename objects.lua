@@ -5,5 +5,22 @@ ship_wall = new_type(64)
 function ship_wall.init(self)
     self.solid = true
 end
+ship_wall_1 = new_type(68)
+function ship_wall_1.init(self)
+    self.solid = true
+end
+ship_wall_2 = new_type(69)
+function ship_wall_2.init(self)
+    self.solid = true
+end
+ship_wall_3 = new_type(84)
+function ship_wall_3.init(self)
+    self.solid = true
+end
+ship_wall_4 = new_type(85)
+function ship_wall_4.init(self)
+    self.solid = true
+end
 
 ship_helm = new_type(66)
+navigation_comp = new_type(67)
