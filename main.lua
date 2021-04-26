@@ -3,6 +3,7 @@ function _init()
     start_game()
     --create(player, 0,0)
 end
+p = {}
 
 function _update()
     dtb_update()
@@ -20,29 +21,36 @@ function _draw()
     cls()
     camera()
     _starfield:draw_stars()
+    if show_title then
+        print_center("untitled space game", 64, 32, 7)
+        print_center("by tsuk", 64, 42, 12)
+    end
     camera(camera_x, camera_y)
 	for o in all(objects) do
 		if o.base == player then p = o else o:draw() end
 	end
-    if p.is_char then
-        draw_char_ship()
-    end
 	if p then p:draw() end
     camera()
     dtb_draw()
     camera(camera_x, camera_y)
+    if game_end then
+        cls()
+        print_center("thanks for playing!", 64, 64, 7)
+    end
 end
 
 function start_game()
-    freeze_time = 0
+    freeze_time = 1
+    game_end = false
+    show_title = true
     load_sector(current_sector)
     load_sector(ship_ob)
-    create(player, 7*8, 7*8)
+    p = create(player, 7*8, 7*8)
     _starfield:init_stars()
     dtb_quick_queue({
         "you are awoken from cryo sleep and quickly ushered onto a ship by the station ai.",
         "a blinking screen informs you that you need to find a fuel source and link up with your sister station lsl-112 for a replacement ftl drive.",
-    }, unfreeze_game)
+    }, hide_title)
 end
 
 function load_sector(sector)
@@ -60,9 +68,6 @@ function load_sector(sector)
 	end
 end
 
-function draw_char_ship()
-    map(112, 0, 112*8, 0, 16, 16)
-end
 
 function freeze_game()
     freeze_time = 1
@@ -70,4 +75,13 @@ end
 
 function unfreeze_game()
     freeze_time = 0
+end
+
+function end_game()
+    game_end = true
+end
+
+function hide_title()
+    show_title = false
+    unfreeze_game()
 end

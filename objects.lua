@@ -134,6 +134,7 @@ function action.init(self)
 end
 
 --ship objects
+ship_floor = new_type(65)
 ship_wall = new_type(64)
 function ship_wall.init(self)
     self.solid = true
@@ -157,3 +158,37 @@ end
 
 ship_helm = new_type(66)
 navigation_comp = new_type(67)
+
+--dynamic
+fuel = new_type(80)
+function fuel.draw(self)
+    if p.visited_the_deep == true then 
+        spr(self.spr, self.x, self.y, 1, 1, self.flip_x, self.flip_y)
+    else
+        spr(65, self.x, self.y, 1, 1, self.flip_x, self.flip_y)
+    end
+end
+ftl = new_type(81)
+function ftl.draw(self)
+    if p.visited_lsl_112 == true then 
+        spr(self.spr, self.x, self.y, 1, 1, self.flip_x, self.flip_y)
+    else
+        spr(65, self.x, self.y, 1, 1, self.flip_x, self.flip_y)
+    end
+end
+hull_breach = new_type(82)
+function hull_breach.draw(self)
+    if p.hull_breach == true then 
+        spr(self.spr, self.x, self.y, 1, 1, self.flip_x, self.flip_y)
+    else
+        spr(65, self.x, self.y, 1, 1, self.flip_x, self.flip_y)
+    end
+end
+breaker = new_type(83)
+function breaker.draw(self)
+    if p.breaker_flipped == true then 
+        spr(self.spr, self.x, self.y, 1, 1, self.flip_x, self.flip_y)
+    else
+        spr(65, self.x, self.y, 1, 1, self.flip_x, self.flip_y)
+    end
+end
