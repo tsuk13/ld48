@@ -85,7 +85,7 @@ function dtb_update()
         local curlinelength=#dtb_dislines[dislineslength]
         local complete=curlinelength>=#curlines[dtb_curline]
         if complete and dtb_curline>=#curlines then
-            if btnp(5) then
+            if btnp(4) then
                 _dtb_nexttext()
                 return
             end
@@ -104,11 +104,11 @@ function dtb_update()
                     end
                     dtb_dislines[dislineslength]=dtb_dislines[dislineslength]..curchar
                 end
-                if btnp(5) then
+                if btnp(4) then
                     dtb_dislines[dislineslength]=curlines[dtb_curline]
                 end
             else
-                if btnp(5) then
+                if btnp(4) then
                     _dtb_nextline()
                 end
             end
@@ -127,7 +127,7 @@ function dtb_draw()
         rectfill(2,125-dislineslength*8,125,125,0)
         rect(1,124-dislineslength*8,126,126,7)
         if dtb_curline>0 and #dtb_dislines[#dtb_dislines]==#dtb_queu[1][dtb_curline] then
-            print("\x97",118,120,1)
+            print("\x8E",118,120,1)
         end
         for i=1,dislineslength do
             print(dtb_dislines[i],4,i*8+119-(dislineslength+offset)*8,7)

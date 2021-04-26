@@ -177,8 +177,12 @@ sectors = {
 		h = 16,
 		warp_datas = {
 			{
-				sector_name = "lsl_113",
-				heading = 270,
+				sector_name = "two_minds",
+				heading = 315,
+			},
+			{
+				sector_name = "dying_light",
+				heading = 0,
 			},
 		},
 	},

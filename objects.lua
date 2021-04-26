@@ -3,8 +3,10 @@ lsl_113 = new_type(9)
 function lsl_113.init(self)
     self.planet_name = "lsl-113"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "lsl-113 is one of 256 manned stations that left your dying home world to seek somewhere hospitable in the depths of space.",
+        "the ftl drive has malfunctioned and needs replacement as well as a refuel",
+        "of the 2,000 lives on board, you are the only one woken from cryo sleep.",
+        "you must seek out a planet with a fuel source and find your sister station to take their backup ftl engine core",
     }
 end
 
@@ -12,8 +14,7 @@ red_headed = new_type(10)
 function red_headed.init(self)
     self.planet_name = "red headed"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "this gas giant glows faintly orange and red due to ammonia crystals and ice that form in its clouds",
     }
 end
 
@@ -21,8 +22,7 @@ red_handed = new_type(11)
 function red_handed.init(self)
     self.planet_name = "red handed"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "red iron oxide covers this planets surface making it appear red",
     }
 end
 
@@ -30,8 +30,9 @@ kill_devils = new_type(12)
 function kill_devils.init(self)
     self.planet_name = "kill devils"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "the surface of kill devils appears to be covered in a silica sand that has been crushed to a fine powder over billions of years",
+        "dunes cover the planet resulting from the near constant wind storms",
+        "these winds and dunes result in a world with ever-changing topography",
     }
     self.hit_w = 16
     self.hit_h = 16
@@ -44,8 +45,8 @@ big_blue = new_type(14)
 function big_blue.init(self)
     self.planet_name = "big blue"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "with an abundance of water, big blue appears to be covered in an unending ocean",
+        "beneath its waves you wonder what lies in the depths."
     }
     self.hit_w = 16
     self.hit_h = 16
@@ -58,8 +59,7 @@ dying_light = new_type(5)
 function dying_light.init(self)
     self.planet_name = "dying light"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "this dying star emits massive flares that can damage electrical equipment like out ship.",
     }
     self.hit_w = 24
     self.hit_h = 24
@@ -72,8 +72,10 @@ lsl_112 = new_type(25)
 function lsl_112.init(self)
     self.planet_name = "lsl-112"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "as you dock with the sister station lsl-112, you feel a sense of relief.",
+        "the station automatically installs the needed ftl drive.",
+        "as you release the coupling system you look back at the spinning wheels of the station and think about how fragile it looks as the distance grows.",
+        "so many lives, loose, adrift in the void."
     }
 end
 
@@ -83,8 +85,7 @@ the_pin = new_type(27)
 function the_pin.init(self)
     self.planet_name = "the pin"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "once a planet, a massive meteor has shattered it resulting in a dangerous band of asteroids.",
     }
 end
 
@@ -94,8 +95,9 @@ deep_blue = new_type(42)
 function deep_blue.init(self)
     self.planet_name = "deep blue"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "not all that different in look from your home planet, deep blue may contain the fuel you need.",
+        "you scan its surface and find a deposit on one of the larger landmasses",
+        "you dispatch a drone that is able to retrieve the necessary amount of fuel need to restart the ftl drives reaction",
     }
 end
 
@@ -103,8 +105,7 @@ love = new_type(43)
 function love.init(self)
     self.planet_name = "love"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "named so for the abstracted shape of a heart, you find yourself thinking of someone back in a cryo pod on your station...",
     }
 end
 
@@ -112,8 +113,7 @@ lust = new_type(44)
 function lust.init(self)
     self.planet_name = "lust"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "the deeper red of this twin heart burns hotter",
     }
 end
 
@@ -121,8 +121,7 @@ thought = new_type(46)
 function thought.init(self)
     self.planet_name = "thought"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "a strange looking planet that bring to your mind, home",
     }
 end
 
@@ -130,8 +129,7 @@ action = new_type(47)
 function action.init(self)
     self.planet_name = "action"
     self.dialogue = {
-        "test",
-        "1,2,3",
+        "a strange looking planet that for some reason feels you with the resolve that you will finish this mission and return home.",
     }
 end
 

@@ -203,10 +203,6 @@ function player.draw(self)
             camera(camera_x, camera_y)
         end
     end
-    camera()
-    print(p.x)
-    print(p.y)
-    camera(camera_x, camera_y)
 end
 
 function player.switch_to_char(self)
@@ -232,10 +228,19 @@ function player.switch_to_ship(self)
 end
 
 function player.cycle_nav(self)
-    local warp_datas = current_sector.warp_datas
-    self.warp_data_index = (self.warp_data_index + 1) % #warp_datas
-    self.warp_data = warp_datas[self.warp_data_index + 1]
-    self.target_sector = sectors[self.warp_data.sector_name]
+    if self.visited_the_deep and self.visited_lsl_112 then
+        self.warp_data = 
+        {
+            sector_name = "lsl_113",
+            heading = 270,
+        }
+        self.target_sector = sectors[self.warp_data.sector_name]
+    else
+        local warp_datas = current_sector.warp_datas
+        self.warp_data_index = (self.warp_data_index + 1) % #warp_datas
+        self.warp_data = warp_datas[self.warp_data_index + 1]
+        self.target_sector = sectors[self.warp_data.sector_name]
+    end
 end
 
 function player.start_warp(self, sector)
@@ -247,7 +252,13 @@ end
 function player.land_planet(self, planet)
     freeze_game()
     if planet.base == lsl_113 and self.visited_the_deep and self.visited_lsl_112 then
-        dtb_quick_queue({"The End"}, unfreeze_game)
+        --todo end game
+        dtb_quick_queue({
+            "as your ship docks back with lsl-113, you can finally begin to relax knowing your mission is complete.",
+            "the station takes care of unloading and restarting the ftl drive reactions.",
+            "you wonder down the hall to your pod and find yourself staring at your reflection in the glass.",
+            "tHE eND",
+        }, freeze_game)
     else
         dtb_quick_queue(planet.dialogue, unfreeze_game)
         if planet.base == deep_blue then

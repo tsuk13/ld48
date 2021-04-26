@@ -1,6 +1,6 @@
 function _init()
-    start_game()
     dtb_init()
+    start_game()
     --create(player, 0,0)
 end
 
@@ -39,6 +39,10 @@ function start_game()
     load_sector(ship_ob)
     create(player, 7*8, 7*8)
     _starfield:init_stars()
+    dtb_quick_queue({
+        "you are awoken from cryo sleep and quickly ushered onto a ship by the station ai.",
+        "a blinking screen informs you that you need to find a fuel source and link up with your sister station lsl-112 for a replacement ftl drive.",
+    }, unfreeze_game)
 end
 
 function load_sector(sector)
