@@ -108,7 +108,7 @@ function dtb_update()
                     dtb_dislines[dislineslength]=curlines[dtb_curline]
                 end
             else
-                if btnp(4) then
+                if btnp(4) or dtb_curline%3 != 0 then
                     _dtb_nextline()
                 end
             end
@@ -126,9 +126,9 @@ function dtb_draw()
         end
         rectfill(2,125-dislineslength*8,125,125,0)
         rect(1,124-dislineslength*8,126,126,7)
-        if dtb_curline>0 and #dtb_dislines[#dtb_dislines]==#dtb_queu[1][dtb_curline] then
+        --if dtb_curline>0 and #dtb_dislines[#dtb_dislines]==#dtb_queu[1][dtb_curline] then
             print("\x8E",118,120,1)
-        end
+        --end
         for i=1,dislineslength do
             print(dtb_dislines[i],4,i*8+119-(dislineslength+offset)*8,7)
         end
