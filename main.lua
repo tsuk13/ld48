@@ -55,17 +55,30 @@ end
 
 function load_sector(sector)
     --create objects
-	for i = sector.x, sector.x + sector.w do
-		for j = sector.y, sector.y + sector.h do
-			for t in all(types) do
-				--if t != player then
-                    if mget(i, j) == t.spr then
-                        create(t, i * 8, j * 8)
+    if sector.objects then
+        for ob in all(sector.objects) do
+            for t in all(types) do
+                --if t != player then
+                    if ob.spr == t.spr then
+                        create(t, ob.x * 8, ob.y * 8)
                     end
                 --end
-			end
-		end
-	end
+            end
+        end
+    else
+        --original
+        for i = sector.x, sector.x + sector.w do
+            for j = sector.y, sector.y + sector.h do
+                for t in all(types) do
+                    --if t != player then
+                        if mget(i, j) == t.spr then
+                            create(t, i * 8, j * 8)
+                        end
+                    --end
+                end
+            end
+        end
+    end
 end
 
 

@@ -16,6 +16,13 @@ sectors = {
 				heading = 180,
 			},
 		},
+		objects = {
+			{
+				spr = 9,
+				x = 7,
+				y = 7,
+			},
+		},
 	},
 	red_duo = {
 		name = "red duo",
@@ -37,6 +44,18 @@ sectors = {
 				heading = 270,
 			},
 		},
+		objects = {
+			{
+				spr = 10,
+				x = 6,
+				y = 22,
+			},
+			{
+				spr = 11,
+				x = 11,
+				y = 29,
+			},
+		},
 	},
 	sand_giant = {
 		name = "sand giant",
@@ -52,6 +71,18 @@ sectors = {
 			{
 				sector_name = "lsl_113",
 				heading = 0,
+			},
+		},
+		objects = {
+			{
+				spr = 12,
+				x = 7,
+				y = 39,
+			},
+			{
+				spr = 41,
+				x = 9,
+				y = 38,
 			},
 		},
 	},
