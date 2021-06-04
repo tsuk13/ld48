@@ -71,7 +71,6 @@ function player.update(self)
             mov_vec.y = -cos(self.angle/360)
             self.x = (current_sector.x*8 + current_sector.w*4) - mov_vec.x * 64
             self.y = (current_sector.y*8 + current_sector.h*4) - mov_vec.y * 64
-            self.y = current_sector.y*8
             self.velocity.x = mov_vec.x
             self.velocity.y = mov_vec.y
             self.is_warping = false
