@@ -27,7 +27,7 @@ sectors = {
 	red_duo = {
 		name = "red duo",
 		x = 0,
-		y = 16,
+		y = 0,
 		w = 16,
 		h = 16,
 		warp_datas = {
@@ -48,19 +48,19 @@ sectors = {
 			{
 				spr = 10,
 				x = 6,
-				y = 22,
+				y = 6,
 			},
 			{
 				spr = 11,
 				x = 11,
-				y = 29,
+				y = 13,
 			},
 		},
 	},
 	sand_giant = {
 		name = "sand giant",
 		x = 0,
-		y = 32,
+		y = 0,
 		w = 16,
 		h = 16,
 		warp_datas = {
@@ -77,12 +77,12 @@ sectors = {
 			{
 				spr = 12,
 				x = 7,
-				y = 39,
+				y = 7,
 			},
 			{
 				spr = 41,
 				x = 9,
-				y = 38,
+				y = 6,
 			},
 		},
 	},
