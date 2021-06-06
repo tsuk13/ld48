@@ -89,7 +89,7 @@ sectors = {
 	the_pins = {
 		name = "the pins",
 		x = 0,
-		y = 48,
+		y = 0,
 		w = 16,
 		h = 16,
 		warp_datas = {
@@ -106,10 +106,17 @@ sectors = {
 				heading = 315,
 			},
 		},
+		objects = {
+			{
+				spr = 27,
+				x = 8,
+				y = 7,
+			},
+		},
 	},
 	big_blue = {
 		name = "big blue",
-		x = 16,
+		x = 0,
 		y = 0,
 		w = 16,
 		h = 16,
@@ -123,11 +130,33 @@ sectors = {
 				heading = 270,
 			},
 		},
+		objects = {
+			{
+				spr = 14,
+				x = 7,
+				y = 7,
+			},
+			{
+				spr = 41,
+				x = 6,
+				y = 6,
+			},
+			{
+				spr = 41,
+				x = 7,
+				y = 9,
+			},
+			{
+				spr = 41,
+				x = 13,
+				y = 9,
+			},
+		},
 	},
 	the_deep = {
 		name = "the deep",
-		x = 16,
-		y = 16,
+		x = 0,
+		y = 0,
 		w = 16,
 		h = 16,
 		warp_datas = {
@@ -148,11 +177,23 @@ sectors = {
 				heading = 315,
 			},
 		},
+		objects = {
+			{
+				spr = 42,
+				x = 7,
+				y = 7,
+			},
+			{
+				spr = 41,
+				x = 8,
+				y = 6,
+			},
+		},
 	},
 	two_hearts = {
 		name = "two hearts",
-		x = 16,
-		y = 32,
+		x = 0,
+		y = 0,
 		w = 16,
 		h = 16,
 		warp_datas = {
@@ -165,11 +206,28 @@ sectors = {
 				heading = 315,
 			},
 		},
+		objects = {
+			{
+				spr = 43,
+				x = 4,
+				y = 11,
+			},
+			{
+				spr = 44,
+				x = 12,
+				y = 7,
+			},
+			{
+				spr = 41,
+				x = 11,
+				y = 6,
+			},
+		},
 	},
 	two_minds = {
 		name = "two minds",
-		x = 16,
-		y = 48,
+		x = 0,
+		y = 0,
 		w = 16,
 		h = 16,
 		warp_datas = {
@@ -182,10 +240,27 @@ sectors = {
 				heading = 0,
 			},
 		},
+		objects = {
+			{
+				spr = 46,
+				x = 10,
+				y = 8,
+			},
+			{
+				spr = 47,
+				x = 8,
+				y = 6,
+			},
+			{
+				spr = 41,
+				x = 9,
+				y = 5,
+			},
+		},
 	},
 	dying_light = {
 		name = "dying light",
-		x = 32,
+		x = 0,
 		y = 0,
 		w = 16,
 		h = 16,
@@ -199,11 +274,18 @@ sectors = {
 				heading = 0,
 			},
 		},
+		objects = {
+			{
+				spr = 5,
+				x = 6,
+				y = 6,
+			},
+		},
 	},
 	lsl_112 = {
 		name = "lsl-112",
-		x = 32,
-		y = 16,
+		x = 0,
+		y = 0,
 		w = 16,
 		h = 16,
 		warp_datas = {
@@ -214,6 +296,13 @@ sectors = {
 			{
 				sector_name = "dying_light",
 				heading = 0,
+			},
+		},
+		objects = {
+			{
+				spr = 25,
+				x = 7,
+				y = 7,
 			},
 		},
 	},
