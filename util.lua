@@ -25,7 +25,7 @@ function spr_r(s,x,y,a,w,h)
             yy=flr(dx*sa+dy*ca+y0)
             if (xx>=0 and xx<sw and yy>=0 and yy<=sh) then
                 local c = sget(sx+xx,sy+yy)
-                if(c~=0) then pset(x+ix,y+iy,sget(sx+xx,sy+yy)) end
+                if(c~=0 and xx < sw and yy < sh) then pset(x+ix,y+iy,sget(sx+xx,sy+yy)) end
             end
         end
     end
