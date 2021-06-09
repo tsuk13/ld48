@@ -8,6 +8,16 @@ function lsl_113.init(self)
         "of the 2,000 lives on board, you are the only one woken from cryo sleep.",
         "you must seek out a planet with a fuel source and find your sister station to take their backup ftl engine core",
     }
+    self.map = {
+        x=0,
+        y=0,
+        w=16,
+        h=16,
+        stairs = {
+            x=8,
+            y=14,
+        },
+    }
 end
 
 red_headed = new_type(10)
@@ -192,3 +202,13 @@ function breaker.draw(self)
         spr(65, self.x, self.y, 1, 1, self.flip_x, self.flip_y)
     end
 end
+
+--stairs
+ship_stairs = new_type(97)
+function ship_stairs.draw(self)
+    spr(65, self.x,self.y,1,1,self.flip_x, self.flip_y)
+    if(p.landed == true) then
+        spr(self.spr,self.x,self.y,1,1,self.flip_x, self.flip_y)
+    end
+end
+planet_stairs = new_type(96)

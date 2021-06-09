@@ -28,6 +28,10 @@ function player.init(self)
     --hazards
     self.hull_breach = false
     self.breaker_flipped = false
+    --planet landing
+    self.landed = false
+    self.landed_planet = nil
+    --camera
     camera_x = self.x - 60
     camera_y = self.y - 60
 end
@@ -273,6 +277,10 @@ function player.switch_to_ship(self)
     self.y = self.ship_y
     camera_x = self.x - 60
     camera_y = self.y - 60
+end
+
+function player.switch_to_planet(self)
+    
 end
 
 function player.cycle_nav(self)
