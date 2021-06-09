@@ -59,4 +59,30 @@ function print_center(text, x, y, c)
 	x -= (#text * 4 - 1) / 2
 	print(text, x, y, c)
 end
+
+function animate_basic_spr(spr_n, x, y, flip_x, flip_y, alt)
+    --grab and move foot pixel and render a line higher
+    if alt then
+        local lf_off = {
+            x=2,
+            y=7,
+        }
+        local rf_off = {
+            x=5,
+            y=7,
+        }
+        local lf_bg_c = pget(x + lf_off.x, y + lf_off.y - 1)
+        local rf_bg_c = pget(x + rf_off.x, y + rf_off.y - 1)
+        spr(spr_n, x, y-1, 1, 1, flip_x, flip_y)
+        local lf_c = pget(x + lf_off.x, y + lf_off.y - 1)
+        local rf_c = pget(x + rf_off.x, y + rf_off.y - 1)
+        pset(x + lf_off.x, y + lf_off.y - 1, lf_bg_c)
+        pset(x + rf_off.x, y + rf_off.y - 1, rf_bg_c)
+        pset(x + lf_off.x-1, y + lf_off.y - 1, lf_c)
+        pset(x + rf_off.x+1, y + rf_off.y - 1, rf_c)
+    else
+        --normal sprite
+        spr(spr_n, x, y, 1, 1, flip_x, flip_y)
+    end
+end
    

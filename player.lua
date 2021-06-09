@@ -14,6 +14,7 @@ function player.init(self)
     self.ship_y = self.y
     self.char_x = 120*8
     self.char_y = 3*8
+    self.anim_counter = 0
     self.is_char = false
     self.can_warp = false
     self.is_warping = false
@@ -162,6 +163,12 @@ function player.update(self)
             self:move_y(input_y)
             self.char_x = self.x
             self.char_y = self.y
+            --animation counter
+            if input_x ~= 0 or input_y ~= 0 then
+                self.anim_counter = (self.anim_counter + 1) % 20
+            else
+                self.anim_counter = 6
+            end
             --character inspection checks
             self.can_use_ship_helm = false
             self.can_use_navigation_comp = false
@@ -210,7 +217,8 @@ end
 function player.draw(self)
     --character draw
     if self.is_char then
-        spr(32, self.x, self.y, 1, 1)
+        animate_basic_spr(32, self.x, self.y, false, false, self.anim_counter > 10)
+        --spr(32, self.x, self.y, 1, 1)
         if(p.target_sector) then
             camera()
             color(7)
